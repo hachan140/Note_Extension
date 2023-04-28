@@ -1,6 +1,7 @@
 package config
 
 import (
+	"errors"
 	"fmt"
 	"github.com/kelseyhightower/envconfig"
 )
@@ -15,6 +16,7 @@ type MySQL struct {
 
 func NewMySQLConfig() (MySQL, error) {
 	var config MySQL
+	return config, errors.New("error 1235")
 	if err := envconfig.Process("", &config); err != nil {
 		return config, err
 	}

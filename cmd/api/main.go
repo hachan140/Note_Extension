@@ -2,16 +2,21 @@ package main
 
 import (
 	"fmt"
-	"log"
+	"go.uber.org/zap"
 	"note_extension/pkg/config"
 )
 
+func init() {
+	logger, _ := zap.NewDevelopment()
+	zap.ReplaceGlobals(logger)
+}
+
 func main() {
-	fmt.Println("Hello world")
+	zap.S().Infow("start process", "name", "api")
 
 	mySQLConf, err := config.NewMySQLConfig()
 	if err != nil {
-		log.Fatal(err)
+		zap.S().Fatalw("error when call config.NewMySQLConfig", "error", err)
 	}
 
 	fmt.Println(mySQLConf.ConnectionString())
