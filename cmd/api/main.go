@@ -2,18 +2,17 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"note_extension/pkg/config"
 )
 
 func main() {
 	fmt.Println("Hello world")
-	mySqlConfig := config.MySQL{
-		Host:     "localhost",
-		Port:     3306,
-		Username: "user",
-		Password: "password",
-		Database: "note",
-	}
-	fmt.Println(mySqlConfig.ConnectionString())
 
+	mySQLConf, err := config.NewMySQLConfig()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(mySQLConf.ConnectionString())
 }
